@@ -6,46 +6,47 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/21 15:50:39 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/24 12:22:50 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME := push_swap
 
-LIBFT = libft.a
+LIBFT := libft.a
+LIBFTDIR := ./libft/
 
-LIBFT_PATH = ./libft/
+CC := gcc
+CFLAGS := -Wall -Wextra -Werror
 
-SRCS_PATH = ./srcs/
+SRCDIR := ./srcs/
+SRCS := main.c\
+		stack/stack.c
 
-OBJS_PATH = ./objs/
+VPATH := $(SRCDIR):$(SRCDIR)stack 
 
-SRCS = main.c
+OBJDIR := ./objs/
+OBJS := $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
 
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
-
-OBJS = $(SRCS:.c=.o)
-
-%.o:	$(SRCS_PATH)%.c
-	$(CC) $(CFLAGS) -c $< -o $(OBJS_PATH)$@
-
-$(NAME): dir $(OBJS)
-	make bonus -C $(LIBFT_PATH)
-	$(CC) $(FLAGS) $(addprefix $(OBJS_PATH),$(OBJS)) -L$(LIBFT_PATH) -lft -I$(LIBFT_PATH) -o $(NAME)
-
-dir:
-	mkdir -p $(OBJS_PATH)
+$(OBJDIR)%.o:	%.c
+	$(CC) $(CFLAGS) -I$(LIBFTDIR) -I$(SRCDIR) -c $< -o $@
 
 all:	$(NAME)
 
+$(NAME): $(OBJS)
+	make bonus -C $(LIBFTDIR)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFTDIR) -lft -I$(LIBFTDIR) -o $@
+
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
 clean:
-	make clean -C $(LIBFT_PATH)
-	rm -rf $(OBJS_PATH)
+	make clean -C $(LIBFTDIR)
+	rm -rf $(OBJDIR)
 
 fclean: clean
-	make fclean -C $(LIBFT_PATH)
+	make fclean -C $(LIBFTDIR)
 	rm -f $(NAME)
 
 re: fclean all
