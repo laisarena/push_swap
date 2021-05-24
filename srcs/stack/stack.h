@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/23 19:48:42 by lfrasson         ###   ########.fr       */
+/*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
+/*   Updated: 2021/05/23 19:22:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef	STACK_H
+# define STACK_H
 
-int	main(void)
+#include "libft.h" 
+
+typedef struct	s_stack
 {
-	t_stack	*stack_a;
-	t_stack *stack_b;
+	int				element;
+	struct s_stack	*next;
+}					t_stack;
 
-	stack_a = NULL;
-	stack_b = NULL;
+t_stack	*ft_new_stack_node(int element);
+t_stack	*ft_stack_pop(t_stack **stack);
+void	ft_stack_push(t_stack **stack, t_stack *node);
 
-	//Parse input
-	//Initialize stack a with input 
-
-	ft_stack_push(&stack_a, ft_new_stack_node(5));
-	ft_stack_push(&stack_b, ft_new_stack_node(6));
-	return(0);
-}
+#endif
