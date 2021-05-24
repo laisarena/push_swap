@@ -1,0 +1,6 @@
+# Object and archive files
+*.[ao]
+objs/
+
+#Executable
+push_swap
