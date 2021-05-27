@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   free_resources.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 19:07:53 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 17:38:54 by lfrasson         ###   ########.fr       */
+/*   Created: 2021/05/27 17:34:23 by lfrasson          #+#    #+#             */
+/*   Updated: 2021/05/27 17:37:21 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "libft.h" 
-# include "stack/stack.h"
-# include <limits.h>
+static void	ft_free_null(void *pointer)
+{
+	if (pointer)
+		free(pointer);
+	pointer = NULL;
+}
 
-# define FALSE		0
-# define TRUE		1
-# define SUCCESS	0
-# define FAIL		-1
+void	ft_free_char_2pointer(char **pointer)
+{
+	int	i;
 
-void	ft_parse(int argc, char **argv);
-void	ft_free_char_2pointer(char **pointer);
-void	ft_error_exit(void);
-
-#endif
+	i = 0;
+	if (!pointer)
+		return ;
+	while (pointer[i])
+		ft_free_null(pointer[i++]);
+	ft_free_null(pointer);
+}

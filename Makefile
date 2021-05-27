@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/26 22:33:05 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/05/27 17:44:56 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,11 @@ CFLAGS += -g -fsanitize=address
 
 SRCDIR := ./srcs/
 SRCS := main.c\
-		stack/stack.c
+		free_resources.c\
+		parse/parse.c\
+		stack/stack.c\
 
-VPATH := $(SRCDIR):$(SRCDIR)stack 
+VPATH := $(SRCDIR) $(SRCDIR)stack $(SRCDIR)parse
 
 OBJDIR := ./objs/
 OBJS := $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
@@ -51,5 +53,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+sani: CFLAGS += -g -fsanitize=address
+sani: re
 
 .PHONY: all clean fclean re
