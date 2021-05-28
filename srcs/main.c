@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/28 13:17:23 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:54:07 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,29 @@ int	ft_is_already_sort(t_list *list)
 	return (TRUE);
 }
 
+void	ft_initialize_stack_a(t_stack **stack_a, t_list *reverse_input)
+{
+	int	*number;
+
+	while(reverse_input)
+	{
+		number = reverse_input->content;
+		ft_stack_push(stack_a, ft_new_stack_node(*number));
+		reverse_input = reverse_input->next;
+	}
+}
+
+void	ft_print_stack(t_stack *stack)
+{
+	printf("A\n");
+	while (stack)
+	{
+		printf("%d\n", stack->element);
+		stack = stack->next;
+	}
+	printf("-\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -55,9 +78,9 @@ int	main(int argc, char **argv)
 	ft_parse(argc, argv, &reverse_input, sort);
 	if(ft_is_already_sort(reverse_input))
 		return (SUCCESS);
-	//Initialize stack a with input 
+	ft_initialize_stack_a(&stack_a, reverse_input);
 	ft_lstclear(&reverse_input, ft_free_null);
-	ft_stack_push(&stack_a, ft_new_stack_node(5));
+	ft_print_stack(stack_a);
 	node = ft_stack_pop(&stack_a);
 	ft_stack_push(&stack_b, node);
 	free(node);

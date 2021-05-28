@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:14:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/26 18:57:40 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:48:39 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_stack	*ft_new_stack_node(int element)
 	t_stack	*node;
 
 	node = malloc(sizeof(t_stack));
-	if (node)
+	if (!node)
 		return (NULL);
 	node->element = element;
 	node->next = NULL;
