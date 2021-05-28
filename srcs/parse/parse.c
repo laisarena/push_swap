@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:41:52 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 17:32:41 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/27 20:48:54 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,34 @@ static int	ft_parse_number(char *str_number, int *number)
 	return (ft_is_integer(lnumber));
 }
 
+void	ft_free_list(t_list **lst)
+{
+	t_list	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = tmp->next;
+		free(tmp);
+	}
+	*lst = NULL;
+}
+
 static void	ft_parse_input(char **input)
 {
-	int number;
+	int		*number;
+	t_list	*list;
 
+	list = NULL;
 	while (*input)
 	{
-		if (!ft_parse_number(*input++, &number))
+		number = malloc(sizeof(int));
+		if (!ft_parse_number(*input++, number))
 			ft_error_exit();
+		ft_add_number_to_list(ft_lstnew(number), &list);
 	}
+	//list to array
+	ft_free_list(&list);
 }
 
 void	ft_parse(int argc, char **argv)

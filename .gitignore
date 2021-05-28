@@ -4,3 +4,5 @@ objs/
 
 #Executable
 push_swap
+
+*.swp
