@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:41:52 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 20:48:54 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/27 21:21:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_free_list(t_list **lst)
 	*lst = NULL;
 }
 
-static void	ft_parse_input(char **input)
+static void	ft_parse_input(char **input, int *sort)
 {
 	int		*number;
 	t_list	*list;
@@ -68,22 +68,22 @@ static void	ft_parse_input(char **input)
 			ft_error_exit();
 		ft_add_number_to_list(ft_lstnew(number), &list);
 	}
-	//list to array
+	ft_list_to_array(&list, sort);
 	ft_free_list(&list);
 }
 
-void	ft_parse(int argc, char **argv)
+void	ft_parse(int argc, char **argv, int *sort)
 {
 	char	**input;
 
 	if (argc == 1)
 		ft_error_exit();
 	if (argc > 2)
-		ft_parse_input(argv + 1);
+		ft_parse_input(argv + 1, sort);
 	else
 	{
 		input = ft_split(argv[1], ' ');
-		ft_parse_input(input);
+		ft_parse_input(input, sort);
 		ft_free_char_2pointer(input);
 	}
 }

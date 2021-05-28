@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 21:06:13 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/27 21:21:53 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack *stack_b;
 	t_stack *node;
-	//int		*sort;
+	int		*sort;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	sort = NULL;
 
-	ft_parse(argc, argv);
+	ft_parse(argc, argv, sort);
 	//Check if already sorted
 	//Initialize stack a with input 
 
