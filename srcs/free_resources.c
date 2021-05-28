@@ -6,13 +6,13 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:34:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 17:37:21 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:49:58 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_free_null(void *pointer)
+void	ft_free_null(void *pointer)
 {
 	if (pointer)
 		free(pointer);

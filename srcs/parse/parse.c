@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:41:52 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 21:21:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:47:44 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,35 +55,36 @@ void	ft_free_list(t_list **lst)
 	*lst = NULL;
 }
 
-static void	ft_parse_input(char **input, int *sort)
+static void	ft_parse_input(char **input, t_list **reverse_input, int *sort)
 {
 	int		*number;
-	t_list	*list;
+	t_list	*sorted_list;
 
-	list = NULL;
+	sorted_list = NULL;
 	while (*input)
 	{
 		number = malloc(sizeof(int));
 		if (!ft_parse_number(*input++, number))
 			ft_error_exit();
-		ft_add_number_to_list(ft_lstnew(number), &list);
+		ft_add_number_sorting(ft_lstnew(number), &sorted_list);
+		ft_lstadd_front(reverse_input, ft_lstnew(number));
 	}
-	ft_list_to_array(&list, sort);
-	ft_free_list(&list);
+	ft_list_to_array(&sorted_list, sort);
+	ft_free_list(&sorted_list);
 }
 
-void	ft_parse(int argc, char **argv, int *sort)
+void	ft_parse(int argc, char **argv, t_list **reverse_input, int *sort)
 {
 	char	**input;
 
 	if (argc == 1)
 		ft_error_exit();
 	if (argc > 2)
-		ft_parse_input(argv + 1, sort);
+		ft_parse_input(argv + 1, reverse_input, sort);
 	else
 	{
 		input = ft_split(argv[1], ' ');
-		ft_parse_input(input, sort);
+		ft_parse_input(input, reverse_input, sort);
 		ft_free_char_2pointer(input);
 	}
 }

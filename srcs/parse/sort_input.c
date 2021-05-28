@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 18:18:06 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/27 21:24:01 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:45:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_list_to_array(t_list	**list, int *sort)
 	}
 }
 
-void	ft_add_number_to_list(t_list *new, t_list **list)
+void	ft_add_number_sorting(t_list *new, t_list **list)
 {
 	t_list	*tmp;
 	t_list	*previous;
