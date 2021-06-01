@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/23 19:22:38 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/28 20:53:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct	s_stack
 {
 	int				element;
+	struct s_stack	*prev;
 	struct s_stack	*next;
 }					t_stack;
 

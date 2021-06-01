@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/28 13:54:07 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/05/31 17:58:41 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,28 @@ void	ft_initialize_stack_a(t_stack **stack_a, t_list *reverse_input)
 	}
 }
 
-void	ft_print_stack(t_stack *stack)
+void	ft_print_stack(t_stack *stack, char c)
 {
-	printf("A\n");
-	while (stack)
+	t_stack	*last;;
+
+	if (!stack)
+		return ;
+	printf("%c\t", c);
+	last = stack->prev;
+	while (stack != last)
 	{
-		printf("%d\n", stack->element);
+		printf("%d\t", stack->element);
 		stack = stack->next;
 	}
-	printf("-\n");
+	printf("%d ", stack->element);
+	printf("|\n");
+}
+
+void	ft_print(t_stack *stack_a, t_stack *stack_b)
+{
+	ft_print_stack(stack_a, 'A');
+	ft_print_stack(stack_b, 'B');
+	printf("-------------------------------------------------------------------------------\n");
 }
 
 int	main(int argc, char **argv)
@@ -80,9 +93,10 @@ int	main(int argc, char **argv)
 		return (SUCCESS);
 	ft_initialize_stack_a(&stack_a, reverse_input);
 	ft_lstclear(&reverse_input, ft_free_null);
-	ft_print_stack(stack_a);
+	ft_print(stack_a, stack_b);
 	node = ft_stack_pop(&stack_a);
 	ft_stack_push(&stack_b, node);
+	ft_print(stack_a, stack_b);
 	free(node);
 	return(SUCCESS);
 }
