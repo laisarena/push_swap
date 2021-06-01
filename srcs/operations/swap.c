@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:18:38 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 10:53:22 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 16:40:27 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,20 @@ static void	ft_swap(t_stack **start)
 	t_stack	*third;
 	t_stack	*last;
 
+	if (!*start)
+		return ;
 	first = *start;
 	second = first->next;
 	third = second->next;
 	last = first->prev;
-	ft_connect(last, second);
-	ft_connect(second, first);
-	ft_connect(first, third);
+	if (first == second)
+		return ;
+	if (third != first)
+	{
+		ft_connect(last, second);
+		ft_connect(second, first);
+		ft_connect(first, third);
+	}
 	*start = second;
 }
 
