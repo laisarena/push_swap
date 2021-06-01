@@ -6,17 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:18:38 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 16:40:27 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 17:08:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
-
-void ft_connect(t_stack *first, t_stack *second)
-{
-	first->next = second;
-	second->prev = first;
-}
 
 static void	ft_swap(t_stack **start)
 {

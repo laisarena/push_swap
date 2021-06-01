@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/28 20:53:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 17:08:54 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct	s_stack
 t_stack	*ft_new_stack_node(int element);
 t_stack	*ft_stack_pop(t_stack **stack);
 void	ft_stack_push(t_stack **stack, t_stack *node);
+void	ft_connect(t_stack *first, t_stack *second);
 
 #endif
