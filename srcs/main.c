@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 10:53:42 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 17:04:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack *stack_b;
-	t_stack *node;
 	t_list	*reverse_input;
 	int		*sort;
 
@@ -96,9 +95,11 @@ int	main(int argc, char **argv)
 	ft_print(stack_a, stack_b);
 	ft_swap_a(&stack_a);
 	ft_print(stack_a, stack_b);
-	node = ft_stack_pop(&stack_a);
-	ft_stack_push(&stack_b, node);
+	ft_push_b(&stack_a, &stack_b);
 	ft_print(stack_a, stack_b);
-	free(node);
+	ft_push_b(&stack_a, &stack_b);
+	ft_print(stack_a, stack_b);
+	ft_double_swap(&stack_a, &stack_b);
+	ft_print(stack_a, stack_b);
 	return(SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:15:10 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 10:54:35 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 17:03:21 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 void	ft_swap_a(t_stack **stack_a);
 void	ft_swap_b(t_stack **stack_b);
 void	ft_double_swap(t_stack **stack_a, t_stack **stack_b);
+void	ft_push_a(t_stack **stack_a, t_stack **stack_b);
+void	ft_push_b(t_stack **stack_a, t_stack **stack_b);
 
 #endif
