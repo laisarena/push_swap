@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/31 17:58:41 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 10:53:42 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	main(int argc, char **argv)
 		return (SUCCESS);
 	ft_initialize_stack_a(&stack_a, reverse_input);
 	ft_lstclear(&reverse_input, ft_free_null);
+	ft_print(stack_a, stack_b);
+	ft_swap_a(&stack_a);
 	ft_print(stack_a, stack_b);
 	node = ft_stack_pop(&stack_a);
 	ft_stack_push(&stack_b, node);

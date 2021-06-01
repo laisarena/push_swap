@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/05/27 20:57:20 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/06/01 09:36:59 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFTDIR := ./libft/
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 CFLAGS += -g
-#CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=address
 
 SRCDIR := ./srcs/
 SRCS := main.c\
@@ -26,8 +26,9 @@ SRCS := main.c\
 		parse/parse.c\
 		parse/sort_input.c\
 		stack/stack.c\
+		operations/swap.c\
 
-VPATH := $(SRCDIR) $(SRCDIR)stack $(SRCDIR)parse
+VPATH := $(SRCDIR) $(SRCDIR)stack $(SRCDIR)parse $(SRCDIR)operations
 
 OBJDIR := ./objs/
 OBJS := $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
