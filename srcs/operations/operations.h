@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:15:10 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 22:21:16 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 22:32:00 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ROTATE			"rr\n"
 # define REV_ROTATE_A	"rra\n"
 # define REV_ROTATE_B	"rrb\n"
-# define REV_ROTATE		"rr\n"
+# define REV_ROTATE		"rrr\n"
 
 void	ft_swap_a(t_stack **stack_a);
 void	ft_swap_b(t_stack **stack_b);
@@ -35,5 +35,9 @@ void	ft_push_b(t_stack **stack_a, t_stack **stack_b);
 void	ft_rotate_a(t_stack **stack_a);
 void	ft_rotate_b(t_stack **stack_b);
 void	ft_double_rotate(t_stack **stack_a, t_stack **stack_b);
+void	ft_rev_rotate_a(t_stack **stack_a);
+void	ft_rev_rotate_b(t_stack **stack_b);
+void	ft_double_rev_rotate(t_stack **stack_a, t_stack **stack_b);
+
 
 #endif

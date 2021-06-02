@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 22:20:20 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/01 22:28:54 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ int	main(int argc, char **argv)
 	ft_rotate_a(&stack_a);
 	ft_print(stack_a, stack_b);
 	ft_double_rotate(&stack_a, &stack_b);
+	ft_print(stack_a, stack_b);
+	ft_rev_rotate_a(&stack_a);
+	ft_print(stack_a, stack_b);
+	ft_double_rev_rotate(&stack_a, &stack_b);
 	ft_print(stack_a, stack_b);
 	return(SUCCESS);
 }
