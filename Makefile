@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/06/01 17:04:31 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/06/01 22:20:48 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS := main.c\
 		stack/stack.c\
 		operations/swap.c\
 		operations/push.c\
+		operations/rotate.c\
 
 VPATH := $(SRCDIR) $(SRCDIR)stack $(SRCDIR)parse $(SRCDIR)operations
 
