@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 22:28:54 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/02 18:34:36 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_is_already_sort(t_list *list)
 	return (TRUE);
 }
 
-void	ft_initialize_stack_a(t_stack **stack_a, t_list *reverse_input)
+void	ft_initialize_stack_a(t_stack *stack_a, t_list *reverse_input)
 {
 	int	*number;
 
@@ -51,39 +51,54 @@ void	ft_initialize_stack_a(t_stack **stack_a, t_list *reverse_input)
 	}
 }
 
-void	ft_print_stack(t_stack *stack, char c)
+void	ft_print_stack(t_node *top, char c)
 {
-	t_stack	*last;;
+	t_node	*last;;
 
-	if (!stack)
+	if (!top)
 		return ;
 	printf("%c\t", c);
-	last = stack->prev;
-	while (stack != last)
+	last = top->prev;
+	while (top != last)
 	{
-		printf("%d\t", stack->element);
-		stack = stack->next;
+		printf("%d\t", top->element);
+		top = top->next;
 	}
-	printf("%d ", stack->element);
+	printf("%d ", top->element);
 	printf("|\n");
 }
 
 void	ft_print(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_print_stack(stack_a, 'A');
-	ft_print_stack(stack_b, 'B');
+	ft_print_stack(stack_a->top, 'A');
+	ft_print_stack(stack_b->top, 'B');
 	printf("-------------------------------------------------------------------------------\n");
+}
+
+void	ft_test(t_stack *stack_a, t_stack *stack_b)
+{
+	ft_swap_a(stack_a);
+	ft_print(stack_a, stack_b);
+	ft_push_b(stack_a, stack_b);
+	ft_push_b(stack_a, stack_b);
+	ft_print(stack_a, stack_b);
+	ft_double_swap(stack_a, stack_b);
+	ft_print(stack_a, stack_b);
+	ft_rotate_a(stack_a);
+	ft_print(stack_a, stack_b);
+	ft_rev_rotate_a(stack_a);
+	ft_print(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack *stack_b;
+	t_stack	stack_a;
+	t_stack stack_b;
 	t_list	*reverse_input;
 	int		*sort;
 
-	stack_a = NULL;
-	stack_b = NULL;
+	ft_new_stack(&stack_a);
+	ft_new_stack(&stack_b);
 	reverse_input = NULL;
 	sort = NULL;
 
@@ -92,22 +107,7 @@ int	main(int argc, char **argv)
 		return (SUCCESS);
 	ft_initialize_stack_a(&stack_a, reverse_input);
 	ft_lstclear(&reverse_input, ft_free_null);
-	ft_print(stack_a, stack_b);
-	ft_swap_a(&stack_a);
-	ft_print(stack_a, stack_b);
-	ft_push_b(&stack_a, &stack_b);
-	ft_print(stack_a, stack_b);
-	ft_push_b(&stack_a, &stack_b);
-	ft_print(stack_a, stack_b);
-	ft_double_swap(&stack_a, &stack_b);
-	ft_print(stack_a, stack_b);
-	ft_rotate_a(&stack_a);
-	ft_print(stack_a, stack_b);
-	ft_double_rotate(&stack_a, &stack_b);
-	ft_print(stack_a, stack_b);
-	ft_rev_rotate_a(&stack_a);
-	ft_print(stack_a, stack_b);
-	ft_double_rev_rotate(&stack_a, &stack_b);
-	ft_print(stack_a, stack_b);
+	ft_print(&stack_a, &stack_b);
+	ft_test(&stack_a, &stack_b);
 	return(SUCCESS);
 }

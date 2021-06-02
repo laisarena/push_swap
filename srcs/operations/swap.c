@@ -6,22 +6,22 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:18:38 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 17:08:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/02 18:08:14 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-static void	ft_swap(t_stack **start)
+static void	ft_swap(t_stack *stack)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*third;
-	t_stack	*last;
+	t_node	*first;
+	t_node	*second;
+	t_node	*third;
+	t_node	*last;
 
-	if (!*start)
+	first = stack->top;
+	if (!first)
 		return ;
-	first = *start;
 	second = first->next;
 	third = second->next;
 	last = first->prev;
@@ -33,22 +33,22 @@ static void	ft_swap(t_stack **start)
 		ft_connect(second, first);
 		ft_connect(first, third);
 	}
-	*start = second;
+	stack->top = second;
 }
 
-void	ft_swap_a(t_stack **stack_a)
+void	ft_swap_a(t_stack *stack_a)
 {
 	ft_swap(stack_a);
 	ft_putstr_fd(SWAP_A, 1);
 }
 
-void	ft_swap_b(t_stack **stack_b)
+void	ft_swap_b(t_stack *stack_b)
 {
 	ft_swap(stack_b);
 	ft_putstr_fd(SWAP_B, 1);
 }
 
-void	ft_double_swap(t_stack **stack_a, t_stack **stack_b)
+void	ft_double_swap(t_stack *stack_a, t_stack *stack_b)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);

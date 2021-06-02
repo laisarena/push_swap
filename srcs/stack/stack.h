@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 17:08:54 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/02 18:11:56 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 
 #include "libft.h" 
 
-typedef struct	s_stack
+typedef struct	s_node
 {
 	int				element;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}					t_stack;
+	struct s_node	*prev;
+	struct s_node	*next;
+}					t_node;
 
-t_stack	*ft_new_stack_node(int element);
-t_stack	*ft_stack_pop(t_stack **stack);
-void	ft_stack_push(t_stack **stack, t_stack *node);
-void	ft_connect(t_stack *first, t_stack *second);
+typedef struct	s_stack
+{
+	int		size;
+	t_node	*top;
+}			t_stack;
+
+void	ft_new_stack(t_stack *stack);
+t_node	*ft_new_stack_node(int element);
+t_node	*ft_stack_pop(t_stack *stack);
+void	ft_stack_push(t_stack *stack, t_node *node);
+void	ft_connect(t_node *first, t_node *second);
 
 #endif

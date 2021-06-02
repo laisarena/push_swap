@@ -6,23 +6,23 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:14:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 17:18:48 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/02 18:27:13 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-void ft_connect(t_stack *first, t_stack *second)
+void ft_connect(t_node *first, t_node *second)
 {
 	first->next = second;
 	second->prev = first;
 }
 
-t_stack	*ft_new_stack_node(int element)
+t_node	*ft_new_stack_node(int element)
 {
-	t_stack	*node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_stack));
+	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
 	node->element = element;
@@ -31,33 +31,43 @@ t_stack	*ft_new_stack_node(int element)
 	return (node);
 }
 
-t_stack		*ft_stack_pop(t_stack **stack)
+void	ft_new_stack(t_stack *stack)
 {
-	t_stack	*node;
-	t_stack	*last;
+	stack->size = 0;
+	stack->top = NULL;
+}
 
-	node = *stack;
+t_node		*ft_stack_pop(t_stack *stack)
+{
+	t_node	*last;
+	t_node	*node;
+
+	node = stack->top;
 	if (!node)
 		return (NULL);
-	*stack = node->next;
+	stack->top = node->next;
 	last = node->prev;
-	ft_connect(last, *stack);
+	ft_connect(last, stack->top);
 	node->prev = NULL;
 	node->next = NULL;
+	stack->size++;
 	return (node);
 }
 
-void	ft_stack_push(t_stack **stack, t_stack *node)
+void	ft_stack_push(t_stack *stack, t_node *node)
 {
-	t_stack	*last;
+	t_node	*top;
+	t_node	*last;
 
-	if (!*stack)
+	top = stack->top;
+	if (!top)
 		ft_connect(node, node);
 	else
 	{
-		last = (*stack)->prev;
+		last = top->prev;
 		ft_connect(last, node);
-		ft_connect(node, *stack);
+		ft_connect(node, top);
 	}
-	*stack = node;
+	stack->top = node;
+	stack->size++;
 }
