@@ -6,26 +6,28 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 18:18:06 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/28 11:45:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 13:22:14 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_list_to_array(t_list	**list, int *sort)
+void	ft_list_to_array(t_list	**list, int **sort)
 {
 	int		size;
 	int		*number;
+	int		*array;
 	t_list	*tmp;
 
 	size = ft_lstsize(*list);
-	sort = ft_calloc(sizeof(int), size + 1);
+	array = ft_calloc(size + 1, sizeof(int));
+	*sort = array;
 	tmp = *list;
 	while (tmp)
 	{
 		number = tmp->content;
-		*sort = *number;
-		sort++;
+		*array = *number;
+		array++;
 		tmp = tmp->next;
 	}
 }

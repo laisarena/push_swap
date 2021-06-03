@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:34:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 10:55:41 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 13:24:40 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ void	ft_test(t_stack *stack_a, t_stack *stack_b)
 	ft_print(stack_a, stack_b);
 }
 
+static void	ft_sort_three(t_stack *stack_a, int *sort)
+{
+	t_node	*top;
+	t_node	*mid;
+
+	if (stack_a->size != 3)
+		return ;
+	top = stack_a->top;
+	mid = top->next;
+	if (sort[2] == top->element)
+		ft_rotate_a(stack_a);
+	if (sort[2] == mid->element)
+		ft_rev_rotate_a(stack_a);
+	mid = stack_a->top->next;
+	if (sort[0] == mid->element)
+		ft_swap_a(stack_a);
+}
+
 static void	ft_sort_two(t_stack *stack_a)
 {
 	if (stack_a->size == 2)
@@ -66,6 +84,6 @@ void	ft_sort(t_stack *stack_a, int *sort)
 	ft_print(stack_a, &stack_b);
 	//ft_test(stack_a, &stack_b);
 	ft_sort_two(stack_a);
-	(void)sort[0];
+	ft_sort_three(stack_a, sort);
 	ft_print(stack_a, &stack_b);
 }

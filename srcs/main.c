@@ -6,12 +6,11 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 10:52:17 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:47:22 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "stdio.h"
 
 void	ft_error_exit(void)
 {
@@ -61,7 +60,7 @@ int	main(int argc, char **argv)
 	reverse_input = NULL;
 	sort = NULL;
 
-	ft_parse(argc, argv, &reverse_input, sort);
+	ft_parse(argc, argv, &reverse_input, &sort);
 	if(ft_is_already_sort(reverse_input))
 		return (SUCCESS);
 	ft_initialize_stack_a(&stack_a, reverse_input);
