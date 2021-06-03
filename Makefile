@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/06/01 22:29:22 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/06/03 10:39:28 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,13 @@ SRCS := main.c\
 		operations/push.c\
 		operations/rotate.c\
 		operations/reverse_rotate.c\
+		sort/sort.c\
 
-VPATH := $(SRCDIR) $(SRCDIR)stack $(SRCDIR)parse $(SRCDIR)operations
+VPATH := $(SRCDIR)\
+		 $(SRCDIR)stack\
+		 $(SRCDIR)parse\
+		 $(SRCDIR)operations\
+		 $(SRCDIR)sort
 
 OBJDIR := ./objs/
 OBJS := $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 19:07:53 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/01 09:38:21 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 10:41:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h" 
 # include "stack/stack.h"
 # include "operations/operations.h"
+# include "sort/sort.h"
 # include <limits.h>
 
 # define FALSE		0

@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/02 18:34:36 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 10:52:17 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,54 +51,13 @@ void	ft_initialize_stack_a(t_stack *stack_a, t_list *reverse_input)
 	}
 }
 
-void	ft_print_stack(t_node *top, char c)
-{
-	t_node	*last;;
-
-	if (!top)
-		return ;
-	printf("%c\t", c);
-	last = top->prev;
-	while (top != last)
-	{
-		printf("%d\t", top->element);
-		top = top->next;
-	}
-	printf("%d ", top->element);
-	printf("|\n");
-}
-
-void	ft_print(t_stack *stack_a, t_stack *stack_b)
-{
-	ft_print_stack(stack_a->top, 'A');
-	ft_print_stack(stack_b->top, 'B');
-	printf("-------------------------------------------------------------------------------\n");
-}
-
-void	ft_test(t_stack *stack_a, t_stack *stack_b)
-{
-	ft_swap_a(stack_a);
-	ft_print(stack_a, stack_b);
-	ft_push_b(stack_a, stack_b);
-	ft_push_b(stack_a, stack_b);
-	ft_print(stack_a, stack_b);
-	ft_double_swap(stack_a, stack_b);
-	ft_print(stack_a, stack_b);
-	ft_rotate_a(stack_a);
-	ft_print(stack_a, stack_b);
-	ft_rev_rotate_a(stack_a);
-	ft_print(stack_a, stack_b);
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
-	t_stack stack_b;
 	t_list	*reverse_input;
 	int		*sort;
 
 	ft_new_stack(&stack_a);
-	ft_new_stack(&stack_b);
 	reverse_input = NULL;
 	sort = NULL;
 
@@ -107,7 +66,7 @@ int	main(int argc, char **argv)
 		return (SUCCESS);
 	ft_initialize_stack_a(&stack_a, reverse_input);
 	ft_lstclear(&reverse_input, ft_free_null);
-	ft_print(&stack_a, &stack_b);
-	ft_test(&stack_a, &stack_b);
+	ft_sort(&stack_a, sort);
+	free(sort);
 	return(SUCCESS);
 }

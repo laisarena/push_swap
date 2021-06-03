@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 23:15:10 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/02 18:17:24 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 10:44:23 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	ft_double_rotate(t_stack *stack_a, t_stack *stack_b);
 void	ft_rev_rotate_a(t_stack *stack_a);
 void	ft_rev_rotate_b(t_stack *stack_b);
 void	ft_double_rev_rotate(t_stack *stack_a, t_stack *stack_b);
-
 
 #endif
