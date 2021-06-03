@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:14:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/02 18:27:13 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 15:02:26 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node		*ft_stack_pop(t_stack *stack)
 	ft_connect(last, stack->top);
 	node->prev = NULL;
 	node->next = NULL;
-	stack->size++;
+	stack->size--;
 	return (node);
 }
 
