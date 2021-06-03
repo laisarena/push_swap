@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:14:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 15:02:26 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 17:39:02 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_node	*ft_new_stack_node(int element)
 	if (!node)
 		return (NULL);
 	node->element = element;
+	node->group = 0;
 	node->prev = NULL;
 	node->next = NULL;
 	return (node);

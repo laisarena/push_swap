@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/02 18:11:56 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 17:38:09 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct	s_node
 {
 	int				element;
+	int				group;
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
