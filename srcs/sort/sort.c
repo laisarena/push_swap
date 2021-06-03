@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:34:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 15:37:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 16:04:31 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void	ft_sort_more(t_stack *stack_a, t_stack *stack_b, int *sort)
 
 	pivot = ft_get_pivot(sort, stack_a->size);
 	ft_split_stack(stack_a, stack_b, pivot);
+	if (stack_a->size > 3)
+		ft_sort_more(stack_a, stack_b, sort + pivot.index);
 	//ft_print(stack_a, stack_b);
 	ft_sort_three(stack_a, sort + pivot.index);
 	//ft_print(stack_a, stack_b);
