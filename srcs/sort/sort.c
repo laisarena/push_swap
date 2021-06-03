@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:34:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 15:29:32 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/03 15:37:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ void	ft_sort_more(t_stack *stack_a, t_stack *stack_b, int *sort)
 
 	pivot = ft_get_pivot(sort, stack_a->size);
 	ft_split_stack(stack_a, stack_b, pivot);
-	ft_print(stack_a, stack_b);
+	//ft_print(stack_a, stack_b);
 	ft_sort_three(stack_a, sort + pivot.index);
-	ft_print(stack_a, stack_b);
+	//ft_print(stack_a, stack_b);
 	ft_return_stack(stack_a, stack_b, pivot, sort);
 }
 
@@ -142,10 +142,10 @@ void	ft_sort(t_stack *stack_a, int *sort)
 	t_stack stack_b;
 	
 	ft_new_stack(&stack_b);
-	ft_print(stack_a, &stack_b);
+	//ft_print(stack_a, &stack_b);
 	//ft_test(stack_a, &stack_b);
 	ft_sort_two(stack_a);
 	ft_sort_three(stack_a, sort);
 	ft_sort_more(stack_a, &stack_b, sort);
-	ft_print(stack_a, &stack_b);
+	//ft_print(stack_a, &stack_b);
 }
