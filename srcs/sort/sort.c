@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:34:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/04 21:05:19 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/04 22:49:54 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ typedef struct s_pivot
 	int	value;
 	int	qtd;
 	int group;
+	int first;
 }	t_pivot;
 
-static t_pivot	ft_get_pivot(int *sort, int size)
+static t_pivot	ft_get_pivot(int *sort, int size, int first)
 {
 	t_pivot	 pivot;
 
@@ -64,6 +65,7 @@ static t_pivot	ft_get_pivot(int *sort, int size)
 		pivot.index = size - 3;
 	pivot.value = sort[pivot.index];
 	pivot.qtd = pivot.index;
+	pivot.first = first;
 	return (pivot);
 }
 
@@ -86,6 +88,27 @@ void	ft_split_stack(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 	}
 }
 
+int	ft_find_sort_way(t_stack *stack_b, t_pivot pivot, int value)
+{
+	t_node *node;
+	int count;
+	int max;
+
+	node = stack_b->top;
+	count = 0;
+	max = pivot.qtd;
+	if (pivot.first)
+		max = pivot.qtd / 2;
+	while (count < max)
+	{
+		if (node->element == value)
+			return (0);
+		count++;
+		node = node->next;
+	}
+	return (1);
+}
+
 void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 		t_pivot pivot, int *sort)
 {
@@ -98,6 +121,7 @@ void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 	pivot.group = stack_b->top->group;
 	while (stack_b->size > 0 && pivot.index >= 0)
 	{
+		reverse = ft_find_sort_way(stack_b, pivot, sort[pivot.index]);
 		if (stack_b->top->element == sort[pivot.index])
 		{
 			ft_push_a(stack_a, stack_b);
@@ -112,21 +136,21 @@ void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 		}
 		if (reverse == 0 && stack_b->top->group != pivot.group)
 			reverse = 1;
-		if (reverse == 1 && stack_b->top->prev->group != pivot.group)
+		else if (reverse == 1 && stack_b->top->prev->group != pivot.group)
 			reverse = 0;
 	}
 }
 
-void	ft_sort_more(t_stack *stack_a, t_stack *stack_b, int *sort)
+void	ft_sort_more(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 {
 	t_pivot pivot;
 
 	pivot.index = 0;
 	if (stack_a->size > 3)
 	{
-		pivot = ft_get_pivot(sort, stack_a->size);
+		pivot = ft_get_pivot(sort, stack_a->size, first);
 		ft_split_stack(stack_a, stack_b, pivot);
-		ft_sort_more(stack_a, stack_b, sort + pivot.index);
+		ft_sort_more(stack_a, stack_b, sort + pivot.index, 0);
 	}
 	ft_sort_three(stack_a, sort + pivot.index);
 	ft_return_stack(stack_a, stack_b, pivot, sort);
@@ -139,5 +163,5 @@ void	ft_sort(t_stack *stack_a, int *sort)
 	ft_new_stack(&stack_b);
 	ft_sort_two(stack_a);
 	ft_sort_three(stack_a, sort);
-	ft_sort_more(stack_a, &stack_b, sort);
+	ft_sort_more(stack_a, &stack_b, sort, 1);
 }
