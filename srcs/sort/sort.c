@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 10:34:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 19:45:30 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/04 21:05:19 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,18 @@ static t_pivot	ft_get_pivot(int *sort, int size)
 {
 	t_pivot	 pivot;
 
-	pivot.index = size / 2;
+	if (size < 10)
+		pivot.index = size / 2;
+	else if (size < 50)
+		pivot.index = size / 3;
+	else if (size < 90)
+		pivot.index = size / 5;
+	else if (size < 110)
+		pivot.index = size / 7;
+	else if (size < 150)
+		pivot.index = size / 9;
+	else
+		pivot.index = size / 11;
 	if (pivot.index > size - 3)
 		pivot.index = size - 3;
 	pivot.value = sort[pivot.index];
