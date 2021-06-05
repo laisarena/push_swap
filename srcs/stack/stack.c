@@ -6,13 +6,13 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:14:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 17:39:02 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 10:55:29 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-void ft_connect(t_node *first, t_node *second)
+void	ft_connect(t_node *first, t_node *second)
 {
 	first->next = second;
 	second->prev = first;
@@ -38,7 +38,7 @@ void	ft_new_stack(t_stack *stack)
 	stack->top = NULL;
 }
 
-t_node		*ft_stack_pop(t_stack *stack)
+t_node	*ft_stack_pop(t_stack *stack)
 {
 	t_node	*last;
 	t_node	*node;

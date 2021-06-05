@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 16:47:36 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/02 18:18:35 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 10:56:11 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ft_pop_push(t_stack *stack_pop, t_stack *stack_push)
 {
-	t_node *node;
-	
+	t_node	*node;
+
 	node = ft_stack_pop(stack_pop);
 	ft_stack_push(stack_push, node);
 }

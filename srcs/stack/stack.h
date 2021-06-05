@@ -6,16 +6,16 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:55:59 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 17:38:09 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 14:24:46 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	STACK_H
+#ifndef STACK_H
 # define STACK_H
 
-#include "libft.h" 
+# include "libft.h" 
 
-typedef struct	s_node
+typedef struct s_node
 {
 	int				element;
 	int				group;
@@ -23,7 +23,7 @@ typedef struct	s_node
 	struct s_node	*next;
 }					t_node;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	int		size;
 	t_node	*top;

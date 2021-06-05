@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:34:23 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/05/28 11:49:58 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 14:55:35 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,17 @@ void	ft_free_char_2pointer(char **pointer)
 	while (pointer[i])
 		ft_free_null(pointer[i++]);
 	ft_free_null(pointer);
+}
+
+void	ft_free_list(t_list **lst)
+{
+	t_list	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = tmp->next;
+		free(tmp);
+	}
+	*lst = NULL;
 }

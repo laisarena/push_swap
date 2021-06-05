@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:41:52 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 11:48:46 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 14:27:30 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,6 @@ static int	ft_parse_number(char *str_number, int *number)
 	return (ft_is_integer(lnumber));
 }
 
-void	ft_free_list(t_list **lst)
-{
-	t_list	*tmp;
-
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = tmp->next;
-		free(tmp);
-	}
-	*lst = NULL;
-}
-
 static void	ft_parse_input(char **input, t_list **reverse_input, int **sort)
 {
 	int		*number;
@@ -78,7 +65,7 @@ void	ft_parse(int argc, char **argv, t_list **reverse_input, int **sort)
 	char	**input;
 
 	if (argc == 1)
-		ft_error_exit();
+		exit(0);
 	if (argc > 2)
 		ft_parse_input(argv + 1, reverse_input, sort);
 	else

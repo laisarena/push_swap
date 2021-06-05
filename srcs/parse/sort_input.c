@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 18:18:06 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/03 13:22:14 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 14:49:20 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,14 @@ void	ft_add_number_sorting(t_list *new, t_list **list)
 {
 	t_list	*tmp;
 	t_list	*previous;
-	int		*number;
-	int		*new_number;
 
 	tmp = *list;
 	previous = *list;
 	while (tmp)
 	{
-		number = (int *)tmp->content;
-		new_number = (int *)new->content;
-		if (*new_number == *number)
+		if (*(int *)(new->content) == *(int *)(tmp->content))
 			ft_error_exit();
-		if (*new_number < *number)
+		if (*(int *)(new->content) < *(int *)(tmp->content))
 		{
 			new->next = tmp;
 			if (tmp == *list)
