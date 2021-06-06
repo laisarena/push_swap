@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 16:45:31 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/05 16:46:41 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/05 17:52:03 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 		{
 			ft_push_a(stack_a, stack_b);
 			pivot.index--;
+			pivot.qtd--;
 		}
 		else
 		{
