@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 15:00:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/05 17:23:52 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/11 14:03:38 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ void	ft_can_swap(t_stack *stack_a, t_stack *stack_b)
 	sb = ft_can_swap_b(stack_b);
 	if (sa && sb)
 		ft_double_swap(stack_a, stack_b);
-	//if (sa && !sb)
-	//	ft_swap_a(stack_a);
 	if (!sa && sb)
 		ft_swap_b(stack_b);
 }
+
 static void	ft_split_stack(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 {
 	int	qtd;
@@ -65,7 +64,7 @@ static void	ft_split_stack(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 	qtd = pivot.qtd;
 	while (qtd > 0)
 	{
-		//ft_can_swap(stack_a, stack_b);
+		ft_can_swap(stack_a, stack_b);
 		if (stack_a->top->element < pivot.value)
 		{
 			stack_a->top->group = pivot.index;
