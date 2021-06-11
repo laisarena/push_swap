@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 15:00:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/10 22:00:40 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/11 18:07:08 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_can_swap(t_stack *stack_a, t_stack *stack_b)
 	if (!sa && sb)
 		ft_swap_b(stack_b);
 }
-static void	ft_split_stack(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
+static void	ft_split_stack_a(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 {
 	int	qtd;
 
@@ -148,17 +148,11 @@ static t_pivot	ft_get_pivot(int *sort, int size, int first)
 	return (pivot);
 }
 
-void	ft_x(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
+void	ft_return_to_b(t_stack *stack_a, t_stack *stack_b,
+		int *sort, t_pivot pivot)
 {
-	t_pivot	pivot;
 	t_pivot	pivot_2;
 	t_pivot	pivot_3;
-
-	if (!(first && stack_b->size > 3))
-		return ;
-	pivot = ft_get_pivot_b(sort, stack_b->size, first);
-	ft_split_stack_b(stack_a, stack_b, pivot);
-	ft_x(stack_a, stack_b, sort, first);
 	
 	pivot_2.index = pivot.index + pivot.qtd / 2;
 	pivot_2.value = sort[pivot_2.index];
@@ -186,6 +180,18 @@ void	ft_x(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 		ft_push_b(stack_a, stack_b);
 }
 
+void	ft_x(t_stack *stack_a, t_stack *stack_b, int *sort, t_pivot pivot_a)
+{
+	t_pivot	pivot;
+
+	if (!(pivot_a.first && stack_b->size > 3))
+		return ;
+	pivot = ft_get_pivot_b(sort, stack_b->size, pivot_a.first);
+	ft_split_stack_b(stack_a, stack_b, pivot);
+	ft_x(stack_a, stack_b, sort, pivot_a);
+	ft_return_to_b(stack_a, stack_b, sort, pivot);
+}
+
 void	ft_sort_all(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 {
 	t_pivot	pivot;
@@ -194,8 +200,8 @@ void	ft_sort_all(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 	if (stack_a->size > 3)
 	{
 		pivot = ft_get_pivot(sort, stack_a->size, first);
-		ft_split_stack(stack_a, stack_b, pivot);
-		ft_x(stack_a, stack_b, sort, first);
+		ft_split_stack_a(stack_a, stack_b, pivot);
+		ft_x(stack_a, stack_b, sort, pivot);
 		ft_sort_all(stack_a, stack_b, sort + pivot.index, 0);
 	}
 	ft_sort_three(stack_a, sort + pivot.index);
