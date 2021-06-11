@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 15:00:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/10 21:17:48 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/10 22:00:40 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,37 @@ static t_pivot	ft_get_pivot(int *sort, int size, int first)
 void	ft_x(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 {
 	t_pivot	pivot;
+	t_pivot	pivot_2;
+	t_pivot	pivot_3;
 
 	if (!(first && stack_b->size > 3))
 		return ;
 	pivot = ft_get_pivot_b(sort, stack_b->size, first);
 	ft_split_stack_b(stack_a, stack_b, pivot);
 	ft_x(stack_a, stack_b, sort, first);
+	
+	pivot_2.index = pivot.index + pivot.qtd / 2;
+	pivot_2.value = sort[pivot_2.index];
+	pivot_2.qtd = pivot_2.index;
+	
+	while (stack_a->top->group == pivot.index)
+	{
+		if (stack_a->top->element < pivot_2.value)
+			ft_push_b(stack_a, stack_b);
+		else
+			ft_rotate_a(stack_a);
+	}
+	
+	pivot_3.index = pivot_2.index + pivot_2.qtd / 2;
+	pivot_3.value = sort[pivot_3.index];
+	//pivot_3.qtd = pivot_2.index;
+	
+	while (stack_a->top->prev->group == pivot.index)
+	{
+		ft_rev_rotate_a(stack_a);
+		if (stack_a->top->element < pivot_3.value)
+			ft_push_b(stack_a, stack_b);
+	}
 	while (stack_a->top->group == pivot.index)
 		ft_push_b(stack_a, stack_b);
 }
