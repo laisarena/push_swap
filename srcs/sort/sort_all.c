@@ -4,68 +4,21 @@
 /*   sort_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                               +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 15:00:20 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/11 18:07:08 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:06:06 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-static int	ft_can_swap_a(t_stack *stack_a)
-{
-	t_node	*top;
-	t_node	*second;
-
-	if (stack_a->size < 2)
-		return (FALSE);
-	top = stack_a->top;
-	second = stack_a->top->next;
-	if (top->group != second->group)
-		return (FALSE);
-	if (top->element > second->element)
-		return (TRUE);
-	return (FALSE);
-}
-
-static int	ft_can_swap_b(t_stack *stack_b)
-{
-	t_node	*top;
-	t_node	*second;
-
-	if (stack_b->size < 2)
-		return (FALSE);
-	top = stack_b->top;
-	second = stack_b->top->next;
-	if (top->group != second->group)
-		return (FALSE);
-	if (top->element < second->element)
-		return (TRUE);
-	return (FALSE);
-}
-
-void	ft_can_swap(t_stack *stack_a, t_stack *stack_b)
-{
-	int	sa;
-	int	sb;
-
-	sa = ft_can_swap_a(stack_a);
-	sb = ft_can_swap_b(stack_b);
-	if (sa && sb)
-		ft_double_swap(stack_a, stack_b);
-	//if (sa && !sb)
-	//	ft_swap_a(stack_a);
-	if (!sa && sb)
-		ft_swap_b(stack_b);
-}
-static void	ft_split_stack_a(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
+static void	ft_first_split(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 {
 	int	qtd;
 
 	qtd = pivot.qtd;
 	while (qtd > 0)
 	{
-		//ft_can_swap(stack_a, stack_b);
 		if (stack_a->top->element < pivot.value)
 		{
 			stack_a->top->group = pivot.index;
@@ -77,54 +30,10 @@ static void	ft_split_stack_a(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
 	}
 }
 
-static void	ft_split_stack_b(t_stack *stack_a, t_stack *stack_b, t_pivot pivot)
-{
-	int	qtd;
-
-	qtd = pivot.qtd;
-	while (qtd > 0 && stack_b->top)
-	{
-		if (stack_b->top->element >= pivot.value)
-		{
-			stack_b->top->group = pivot.index;
-			ft_push_a(stack_a, stack_b);
-			qtd--;
-		}
-		else
-			ft_rotate_b(stack_b);
-	}
-}
-
-static t_pivot	ft_get_pivot_b(int *sort, int size, int first)
+static t_pivot	ft_get_first_pivot(int *sort, int size, int first)
 {
 	t_pivot	 pivot;
 
-	if (size < 10)
-		pivot.index = size - size / 2;
-	else if (size < 50)
-		pivot.index = size - size / 3;
-	else if (size < 90)
-		pivot.index = size - size / 5;
-	else if (size < 110)
-		pivot.index = size - size / 7;
-	else if (size < 150)
-		pivot.index = size - size / 9;
-	else
-		pivot.index = size - size / 11;
-	//pivot.index = size / 2;
-	//pivot.index = 2 * size / 3;
-	if (pivot.index > size - 2)
-		pivot.index = size - 2;
-	pivot.value = sort[pivot.index];
-	pivot.qtd = size - pivot.index;
-	pivot.first = first;
-	return (pivot);
-}
-
-static t_pivot	ft_get_pivot(int *sort, int size, int first)
-{
-	t_pivot	 pivot;
-	
 	if (size < 10)
 		pivot.index = size / 2;
 	else if (size < 50)
@@ -137,7 +46,6 @@ static t_pivot	ft_get_pivot(int *sort, int size, int first)
 		pivot.index = size / 9;
 	else
 		pivot.index = size / 11;
-	//pivot.index = size / 2;
 	if (first)
 		pivot.index = 2 * size / 3;
 	if (pivot.index > size - 3)
@@ -148,50 +56,6 @@ static t_pivot	ft_get_pivot(int *sort, int size, int first)
 	return (pivot);
 }
 
-void	ft_return_to_b(t_stack *stack_a, t_stack *stack_b,
-		int *sort, t_pivot pivot)
-{
-	t_pivot	pivot_2;
-	t_pivot	pivot_3;
-	
-	pivot_2.index = pivot.index + pivot.qtd / 2;
-	pivot_2.value = sort[pivot_2.index];
-	pivot_2.qtd = pivot_2.index;
-	
-	while (stack_a->top->group == pivot.index)
-	{
-		if (stack_a->top->element < pivot_2.value)
-			ft_push_b(stack_a, stack_b);
-		else
-			ft_rotate_a(stack_a);
-	}
-	
-	pivot_3.index = pivot_2.index + pivot_2.qtd / 2;
-	pivot_3.value = sort[pivot_3.index];
-	//pivot_3.qtd = pivot_2.index;
-	
-	while (stack_a->top->prev->group == pivot.index)
-	{
-		ft_rev_rotate_a(stack_a);
-		if (stack_a->top->element < pivot_3.value)
-			ft_push_b(stack_a, stack_b);
-	}
-	while (stack_a->top->group == pivot.index)
-		ft_push_b(stack_a, stack_b);
-}
-
-void	ft_x(t_stack *stack_a, t_stack *stack_b, int *sort, t_pivot pivot_a)
-{
-	t_pivot	pivot;
-
-	if (!(pivot_a.first && stack_b->size > 3))
-		return ;
-	pivot = ft_get_pivot_b(sort, stack_b->size, pivot_a.first);
-	ft_split_stack_b(stack_a, stack_b, pivot);
-	ft_x(stack_a, stack_b, sort, pivot_a);
-	ft_return_to_b(stack_a, stack_b, sort, pivot);
-}
-
 void	ft_sort_all(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 {
 	t_pivot	pivot;
@@ -199,9 +63,9 @@ void	ft_sort_all(t_stack *stack_a, t_stack *stack_b, int *sort, int first)
 	pivot.index = 0;
 	if (stack_a->size > 3)
 	{
-		pivot = ft_get_pivot(sort, stack_a->size, first);
-		ft_split_stack_a(stack_a, stack_b, pivot);
-		ft_x(stack_a, stack_b, sort, pivot);
+		pivot = ft_get_first_pivot(sort, stack_a->size, first);
+		ft_first_split(stack_a, stack_b, pivot);
+		ft_second_level(stack_a, stack_b, sort, pivot);
 		ft_sort_all(stack_a, stack_b, sort + pivot.index, 0);
 	}
 	ft_sort_three(stack_a, sort + pivot.index);

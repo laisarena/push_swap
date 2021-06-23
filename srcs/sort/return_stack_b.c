@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 16:45:31 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/05 17:52:03 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:40:24 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ static int	ft_change_direction(t_node *top, int group, int reverse)
 	return (reverse);
 }
 
+static void	ft_rotate_stack_b(t_stack *stack_b, int reverse)
+{
+	if (reverse)
+		ft_rev_rotate_b(stack_b);
+	else
+		ft_rotate_b(stack_b);
+}
+
 void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 		t_pivot pivot, int *sort)
 {
@@ -62,12 +70,7 @@ void	ft_return_stack(t_stack *stack_a, t_stack *stack_b,
 			pivot.qtd--;
 		}
 		else
-		{
-			if (reverse)
-				ft_rev_rotate_b(stack_b);
-			else
-				ft_rotate_b(stack_b);
-		}
+			ft_rotate_stack_b(stack_b, reverse);
 		reverse = ft_change_direction(stack_b->top, pivot.group, reverse);
 	}
 }
