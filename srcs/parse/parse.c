@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.b      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:41:52 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/05 14:27:30 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/24 15:42:13 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	ft_is_string_number(char *string)
 {
 	if (*string == '-')
 		string++;
+	if (!(*string))
+		return (FALSE);
 	while (*string)
 		if (!ft_isdigit(*string++))
 			return (FALSE);

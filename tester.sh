@@ -4,9 +4,6 @@
 #    tester.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/04 16:53:09 by lfrasson          #+#    #+#              #
-#    Updated: 2021/06/05 12:34:47 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +11,6 @@
 
 NUM_TESTS=100
 PUSH_SWAP=./push_swap
-CHECKER=./checker
 CKER=1
 RET_CKER="is not working"
 
@@ -25,6 +21,29 @@ BLUE="\033[0;34m"
 MUTED="\033[1;30m"
 RESET="\033[0m"
 BOLD="\033[1m"
+
+FLAG=all
+while getopts f:n: flag
+do
+	case "${flag}" in
+		f) FLAG=${OPTARG};;
+		n) NUM_TESTS=${OPTARG};;
+	esac
+done
+
+if ! command -v ruby &> /dev/null
+then
+	echo -e "${RED}${BOLD}Ruby not found. Aborting"
+	echo -e "If using Linux, try 'sudo apt-get install ruby' to install${RESET}"
+	exit
+fi
+
+if [ "$(eval uname)" == "Linux" ]
+then
+	CHECKER=./checker_linux
+else
+	CHECKER=./checker
+fi
 
 if ! command -v $CHECKER &> /dev/null
 then
@@ -129,27 +148,39 @@ random_checker()
 	fi
 }
 
-echo -e "\n${BOLD}Error management${RESET}\n"
-error "Non numeric parameters" "3 aa 1"
-error "Duplicate numeric parameter" "3 3 1"
-error "Only numeric parameters including one greater than MAX INT" "3 1 2147483648"
-error "Only numeric parameters including one less than MIN INT" "3 1 -2147483649"
+echo $FLAG
 
-echo -e "\n${BOLD}Identity test${RESET}\n"
-do_noting "Without any parameters"
-do_noting "With a list that has already been sorted" "42"
-do_noting "With a list that has already been sorted" "0 1 2 3"
-do_noting "With a list that has already been sorted" "0 1 2 3 4 5 6 7 8 9"
+if [ "$FLAG" = "all" ] || [ "$FLAG" = "error" ]; then
+	echo -e "\n${BOLD}Error management${RESET}\n"
+	error "Non numeric parameters" "3 aa 1"
+	error "Duplicate numeric parameter" "3 3 1"
+	error "Only numeric parameters including one greater than MAX INT" "3 1 2147483648"
+	error "Only numeric parameters including one less than MIN INT" "3 1 -2147483649"
+fi
 
-echo -e "\n${BOLD}Simple version${RESET}\n"
-checker3 "Three numbers" "2 1 0"
-checker5 "Five numbers" "1 5 2 4 3"
-random_checker "Random list of Five numbers" "(0..4)" 12
+if [ "$FLAG" = "all" ] || [ "$FLAG" = "sorted" ]; then
+	echo -e "\n${BOLD}Identity test${RESET}\n"
+	do_noting "Without any parameters"
+	do_noting "With a list that has already been sorted" "42"
+	do_noting "With a list that has already been sorted" "0 1 2 3"
+	do_noting "With a list that has already been sorted" "0 1 2 3 4 5 6 7 8 9"
+fi
 
-echo -e "\n${BOLD}Middle version${RESET}\n"
-echo -e "less than 700\t-> 5\nless than 900\t-> 4\nless than 1100\t-> 3\nless than 1300\t-> 2\nless than 1500\t-> 1\n"
-random_checker "Random list of hundred numbers -50 to 49" "(-50..49)" 1500
+if [ "$FLAG" = "all" ] || [ "$FLAG" = "simple" ]; then
+	echo -e "\n${BOLD}Simple version${RESET}\n"
+	checker3 "Three numbers" "2 1 0"
+	checker5 "Five numbers" "1 5 2 4 3"
+	random_checker "Random list of Five numbers" "(0..4)" 12
+fi
 
-echo -e "\n${BOLD}Advanced version${RESET}\n"
-echo -e "less than 5500\t-> 5\nless than 7000\t-> 4\nless than 8500\t-> 3\nless than 10000\t-> 2\nless than 11500\t-> 1\n"
-random_checker "Random list of five hundred numbers 0 to 499" "(0..499)" 11500
+if [ "$FLAG" = "all" ] || [ "$FLAG" = "middle" ]; then
+	echo -e "\n${BOLD}Middle version${RESET}\n"
+	echo -e "less than 700\t-> 5\nless than 900\t-> 4\nless than 1100\t-> 3\nless than 1300\t-> 2\nless than 1500\t-> 1\n"
+	random_checker "Random list of hundred numbers -50 to 49" "(-50..49)" 1500
+fi
+
+if [ "$FLAG" = "all" ] || [ "$FLAG" = "advanced" ]; then
+	echo -e "\n${BOLD}Advanced version${RESET}\n"
+	echo -e "less than 5500\t-> 5\nless than 7000\t-> 4\nless than 8500\t-> 3\nless than 10000\t-> 2\nless than 11500\t-> 1\n"
+	random_checker "Random list of five hundred numbers 0 to 499" "(0..499)" 11500
+fi

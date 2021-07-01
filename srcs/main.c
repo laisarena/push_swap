@@ -6,7 +6,7 @@
 /*   By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:42:17 by lfrasson          #+#    #+#             */
-/*   Updated: 2021/06/05 11:09:33 by lfrasson         ###   ########.fr       */
+/*   Updated: 2021/06/25 17:56:48 by lfrasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ int	ft_is_already_sort(t_list *list)
 	int	*number;
 	int	*next_number;
 
-	number = list->content;
-	list = list->next;
-	while (list)
+	if (list)
 	{
-		next_number = (int *)list->content;
-		if (*number < *next_number)
-			return (FALSE);
-		number = next_number;
+		number = list->content;
 		list = list->next;
+		while (list)
+		{
+			next_number = (int *)list->content;
+			if (*number < *next_number)
+				return (FALSE);
+			number = next_number;
+			list = list->next;
+		}
 	}
 	ft_lstclear(&list, ft_free_null);
 	return (TRUE);

@@ -6,7 +6,7 @@
 #    By: lfrasson <lfrasson@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 23:46:27 by lfrasson          #+#    #+#              #
-#    Updated: 2021/06/23 15:59:00 by lfrasson         ###   ########.fr        #
+#    Updated: 2021/07/01 11:32:19 by lfrasson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME := push_swap
 LIBFT := libft.a
 LIBFTDIR := ./libft/
 
-CC := gcc
+CC := clang
 CFLAGS := -Wall -Wextra -Werror
 CFLAGS += -g
 CFLAGS += -fsanitize=address
